@@ -1,18 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="en">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to ....</title>
-
-    <!--CSS-->
+  <meta charset="UTF-8" />
+  <title>Auth test</title>
 </head>
+<body>
+  <h1>Register / Login (API test)</h1>
 
-    <header>
-        <h1>Welcome to our website</h1>
-        <nav>
-            <div id="HOME"></div>
-        </nav>
+  <label>Email <input id="email" type="email" /></label><br />
+  <label>Password <input id="password" type="password" /></label><br />
+  <label>First name <input id="firstName" /></label><br />
+  <label>Last name <input id="lastName" /></label><br />
+  <label>Role
+    <select id="role">
+      <option value="student">student</option>
+      <option value="employer">employer</option>
+    </select>
+  </label><br /><br />
 
-    </header>
+  <button id="registerBtn">Register</button>
+  <button id="loginBtn">Login</button>
+  <button id="meBtn">Me</button>
+
+  <pre id="out"></pre>
+
+  <script>
+    // Must match your Express PORT in backend/.env
+    const API = 'http://localhost:3001';
+
+    const out = document.getElementById('out');
+    function show(data) {
+      out.textContent = typeof data === 'string' ? data : JSON.stringify(data, null, 2);
+    }
+
+    function formBody() {
+      return {
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        role: document.getElementById('role').value,
+      };
+    }
+
+    document.getElementById('registerBtn').onclick = async () => {
+      const res = await fetch(API + '/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formBody()),
+      });
+      const data = await res.json();
+      show({ status: res.status, data });
+
+      // Save token if Supabase returned a session
+      if (data.session?.access_token) {
+        localStorage.setItem('access_token', data.session.access_token);
+      }
+    };
+
+    document.getElementById('loginBtn').onclick = async () => {
+      const { email, password } = formBody();
+      const res = await fetch(API + '/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      show({ status: res.status, data });
+
+      if (data.session?.access_token) {
+        localStorage.setItem('access_token', data.session.access_token);
+      }
+    };
+
+    document.getElementById('meBtn').onclick = async () => {
+      const token = localStorage.getItem('access_token');
+      if (!token) {
+        show('No token yet — register or login first');
+        return;
+      }
+      const res = await fetch(API + '/api/me', {
+        headers: { Authorization: 'Bearer ' + token },
+      });
+      const data = await res.json();
+      show({ status: res.status, data });
+    };
+  </script>
+</body>
 </html>
