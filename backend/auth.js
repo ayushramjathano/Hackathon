@@ -150,8 +150,8 @@ export async function login(req, res) {
 }
 
 /**
- * Middleware: require Authorization: Bearer <access_token>
- * Attaches Supabase auth user to req.user
+ * require Authorization: Bearer <access_token>
+ * adds Supabase auth user to req.user
  */
 export async function requireAuth(req, res, next) {
   const header = req.headers.authorization;
