@@ -7,6 +7,7 @@
 <body>
   <h1>Register / Login (API test)</h1>
 
+  <!-- Basic Sign up / Log in form -->
   <label>Email <input id="email" type="email" /></label><br />
   <label>Password <input id="password" type="password" /></label><br />
   <label>First name <input id="firstName" /></label><br />
@@ -25,14 +26,18 @@
   <pre id="out"></pre>
 
   <script>
-    // Must match your Express PORT in backend/.env
+    // This is where the apis are stored
     const API = 'http://localhost:3001';
 
-    const out = document.getElementById('out');
-    function show(data) {
-      out.textContent = typeof data === 'string' ? data : JSON.stringify(data, null, 2);
-    }
+    // idk what this does but was there if i dont need it soon i'll remove it completely
+    // const out = document.getElementById('out');
+    // function show(data) {
+    //   out.textContent = typeof data === 'string' ? data : JSON.stringify(data, null, 2);
+    // }
 
+
+
+    //this functions returns all the values from the form, can be done in other ways
     function formBody() {
       return {
         email: document.getElementById('email').value,
@@ -43,14 +48,15 @@
       };
     }
 
+    // the async means that it works in the background so the website does freeze while it waits for the backend to repsond
     document.getElementById('registerBtn').onclick = async () => {
       const res = await fetch(API + '/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formBody()),
       });
-      const data = await res.json();
-      show({ status: res.status, data });
+    //   const data = await res.json();
+    //   show({ status: res.status, data });
 
       // Save token if Supabase returned a session
       if (data.session?.access_token) {
@@ -60,13 +66,13 @@
 
     document.getElementById('loginBtn').onclick = async () => {
       const { email, password } = formBody();
-      const res = await fetch(API + '/api/login', {
+      const res = await fetch(API + '/api/login', { //it is calling the API backend log in and passing in the method headers and body this is the same for all posts.
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
-      const data = await res.json();
-      show({ status: res.status, data });
+    //   const data = await res.json();
+    //   show({ status: res.status, data });
 
       if (data.session?.access_token) {
         localStorage.setItem('access_token', data.session.access_token);
@@ -82,8 +88,8 @@
       const res = await fetch(API + '/api/me', {
         headers: { Authorization: 'Bearer ' + token },
       });
-      const data = await res.json();
-      show({ status: res.status, data });
+    //   const data = await res.json();
+    //   show({ status: res.status, data });
     };
   </script>
 </body>
