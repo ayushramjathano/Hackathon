@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { register, login, requireAuth, me, supabaseAdmin } from './auth.js';
+import { getAiJobRecommendations } from './ai.js';
 
 
 const app = express();
@@ -20,7 +21,7 @@ app.get('/', (_req, res) => {
       createJobListing: 'POST /api/joblisting',
       addStudentInfo: 'POST /api/studentInfo',
       getJobListings: 'GET /api/joblisting',
-      getReccomendedJobListings: 'GET /api/reccomendedJob'
+      getReccomendedJobListings: 'GET /api/reccomendedJobs'
     },
   });
 });
@@ -232,19 +233,3 @@ export async function getRecommendedJobListings(req, res) {
     jobs,
   });
 }
-
-
-
-/**
- * Input: studentInfo + list of jobs
- * Output: [{ id: number, reason: string }, ...]  (max 5)
- */
-async function getAiJobRecommendations(studentInfo, jobs) {
-  // PHASE 1 (now): stub
-  const first = jobs.slice(0, 5).map((j) => ({
-    id: j.id,
-    reason: `Stub match for "${j.job_name}" based on your skills.`,
-  }));
-  return first;
-}
-  // PHASE 2 (later): call real AI, parse JSON, return same shape
