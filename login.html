@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Auth test</title>
+  <link rel="stylesheet" href="Stylingsheet.css">
+</head>
+<body>
+  <h1>Register / Login </h1>
+
+  <!-- Basic Sign up / Log in form -->
+  <label>Email <input id="email" type="email" /></label><br />
+  <label>Password <input id="password" type="password" /></label><br />
+  <label>First name <input id="firstName" /></label><br />
+  <label>Last name <input id="lastName" /></label><br />
+  <label>Role
+    <select id="role">
+      <option value="student">student</option>
+      <option value="employer">employer</option>
+    </select>
+  </label><br /><br />
+
+  <button id="registerBtn">Register</button>
+  <button id="loginBtn">Login</button>
+
+  <pre id="out"></pre>
+
+  <script>
+    // This is where the apis are stored
+    const API = 'http://localhost:3001';
+
+    // idk what this does but was there if i dont need it soon i'll remove it completely
+    // const out = document.getElementById('out');
+    // function show(data) {
+    //   out.textContent = typeof data === 'string' ? data : JSON.stringify(data, null, 2);
+    // }
+
+
+
+    //this functions returns all the values from the form, can be done in other ways
+    function formBody() {
+      return {
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        role: document.getElementById('role').value,
+      };
+    }
+
+    // the async means that it works in the background so the website does freeze while it waits for the backend to repsond
+    document.getElementById('registerBtn').onclick = async () => {
+      const res = await fetch(API + '/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formBody()),
+      });
+    //   const data = await res.json();
+    //   show({ status: res.status, data });
+
+      // Save token if Supabase returned a session
+      if (data.session?.access_token) {
+        localStorage.setItem('access_token', data.session.access_token);
+      }
+    };
+
+    document.getElementById('loginBtn').onclick = async () => {
+      const { email, password } = formBody();
+      const res = await fetch(API + '/api/login', { //it is calling the API backend log in and passing in the method headers and body this is the same for all posts.
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+    //   const data = await res.json();
+    //   show({ status: res.status, data });
+
+      if (data.session?.access_token) {
+        localStorage.setItem('access_token', data.session.access_token);
+      }
+    };
+  </script>
+</body>
+</html>
