@@ -1,78 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+    <header>
+    <meta charset="UTF-8" />
+  <title>Welcome to Nexora.AI</title>
+  <link rel="stylesheet" href="Stylingsheet.css">
+<img class="img" src="C:\Users\Ayush Richfield\OneDrive - Richfield Graduate Institute of Technology\Desktop\Semester 2-Richfield\Hackathon\Logo.png">
+  <body>
+    <div class="nav-links">
+      
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="login.html">Sign Up|Login</a>
+<a href="Students.html">Our Students</a>
+</div>
+</header>
+  <h1 class="index">Welcome to Nexora.AI</h1>
+  <p class="intro">Our AI-driven platform is designed to help IT graduates become more career-ready and improve their chances of finding employment.
+     The website uses artificial intelligence to provide 
+    personalised career guidance, identify skill gaps, improve CVs and cover letters, prepare users for interviews, recommend relevant IT skills and
+     certifications, and connect graduates with suitable job opportunities. The goal is to give IT graduates the tools, confidence, and knowledge they need to successfully enter the technology industry.</p>
+  </body>
 
-<head>
-  <meta charset="UTF-8" />
-  <title>log in basic</title>
-</head>
-
-<body>
-  <h1>Register / Login</h1>
-
-  <!-- Basic form for signing in and stuff-->
-  <label>Email <input id="email" type="email" /></label><br />
-  <label>Password <input id="password" type="password" /></label><br />
-  <label>First name <input id="firstName" /></label><br />
-  <label>Last name <input id="lastName" /></label><br />
-  <label>Role
-    <select id="role">
-      <option value="student">student</option>
-      <option value="employer">employer</option>
-    </select>
-  </label><br /><br />
-
-  <button id="registerBtn">Register</button>
-  <button id="loginBtn">Login</button>
-  <button id="meBtn">Me</button>
-
-  <script src="functions.js"></script>
-  <script>
-
-    //this functions returns all the values from the form, can be done in other ways
-function formBody() {
-      return {
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value,
-        first_name: document.getElementById('firstName').value,
-        last_name: document.getElementById('lastName').value,
-        role: document.getElementById('role').value,
-      };
-    }
-
-    // the async means that it works in the background so the website does freeze while it waits for the backend to repsond
-    document.getElementById('registerBtn').onclick = async () => {
-      const { email, password, first_name, last_name, role } = formBody();
-      try {
-        const data = await register(email, password, first_name, last_name, role);
-        console.log('registered ok', data)
-      } catch (err) {
-        console.error(err)
-      }
-    };
-
-    document.getElementById('loginBtn').onclick = async () => {
-      const { email, password } = formBody();
-      try {
-        const data = await login(email, password); // two args
-        console.log('login ok', data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    document.getElementById('meBtn').onclick = async () => {
-      const token = localStorage.getItem('access_token');
-      if (!token) {
-        show('No token yet — register or login first');
-        return;
-      }
-      const res = await fetch(API + '/api/me', {
-        headers: { Authorization: 'Bearer ' + token },
-      });
-      //   const data = await res.json();
-      //   show({ status: res.status, data });
-    };
-  </script>
-</body>
-
+  <button class="ai-button" onclick="window.location.href='login.html'">CLICK HERE TO START NOW AND USE OUR AI</button>
+  <br>
+  <br>
+  <br>
+  <hr>
+  <footer class="footer">&copy; 2026 Nexora.AI All Rights Reserved</footer>
 </html>
