@@ -1,0 +1,73 @@
+html {
+    background: linear-gradient(135deg, #091137, #1d346a, #071a2e);
+    color: white;
+    min-height: 100vh;
+}
+.index{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+    font-size: 100px;
+    color: blue;
+    
+}
+.intro{
+    font-family: fantasy;
+    text-align: center;
+    color: cornflowerblue;
+}
+.img{
+    height: 300px;
+    width: 750px;
+    display: block;
+    margin: 0 auto;
+    
+}
+.nav-links{
+    background-color: #000000;
+    color: cyan;
+    padding: 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin:5px;
+    display: inline-block;
+    border-right: 1px solid whitesmoke;
+    display: flex;
+    width:97.5%;
+    justify-content: space-around;
+    align-items: center;
+    align-self: center;
+    
+
+}    
+.nav-links:hover{
+    background-color: #000000;
+}
+.nav-links a{
+    text-decoration: none !important;
+    color: white !important;
+    font-size:18px;
+}
+.footer{
+    text-align: center;
+    font-family: fantasy;
+}
+.ai-button{
+    background-color: #008cff;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+
+.LOGO{
+    width: 200px;
+    height: 200px;
+}
+.img1{
+    width: 1000px;
+    height:500px;
+}
