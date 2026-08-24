@@ -1,73 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <title>Auth test</title>
+  <title>Nexora.AI Register / Log in</title>
   <link rel="stylesheet" href="Stylingsheet.css">
 </head>
+
 <body>
   <h1 class="index">Register / Login </h1>
-      <div class="nav-links">
-      
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="login.html">Sign Up|Login</a>
-<a href="Students.html">Our students</a>
-<a href="listings.html">All Job Listings</a>
-<a href="reccomendedJobs.html">AI reccomended jobs</a>
-      </div>
-  <!-- Basic Sign up / Log in form -->
-  <label>Email <input id="email" type="email" /></label><br />
-  <label>Password <input id="password" type="password" /></label><br />
-  <label>First name <input id="firstName" /></label><br />
-  <label>Last name <input id="lastName" /></label><br />
-  <label>Role
-    <select id="role">
-      <option value="student">student</option>
-      <option value="employer">employer</option>
-    </select>
-  </label><br /><br />
+  <div class="nav-links">
 
-  <button id="registerBtn">Register</button>
-  <button id="loginBtn">Login</button>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="login.html">Sign Up|Login</a>
+    <a href="Students.html">Our students</a>
+    <a href="listings.html">All Job Listings</a>
+    <a href="reccomendedJobs.html">AI reccomended jobs</a>
+  </div>
+  <!-- Basic Sign up / Log in form -->
+   <div class="signup-login">
+    <div>
+    <h1>Register</h1>
+    <label>Email <input id="email" type="email" /></label><br />
+    <label>Password <input id="password" type="password" /></label><br />
+    <label>First name <input id="firstName" /></label><br />
+    <label>Last name <input id="lastName" /></label><br />
+    <label>Role
+      <select id="role">
+        <option value="student">student</option>
+        <option value="employer">employer</option>
+      </select>
+    </label><br /><br />
+
+    <button id="registerBtn">Register</button>
+  </div>
+  <div>
+    <h1>Login</h1>
+    <label>Email <input id="email" type="email" /></label><br />
+    <label>Password <input id="password" type="password" /></label><br />
+    <br />
+
+    <button id="loginBtn">Login</button>
+  </div>
+   </div>
+  
+
 
   <pre id="out"></pre>
 
   <script src="functions.js"></script>
-<script>
-  const out = document.getElementById('out');
+  <script>
+    const out = document.getElementById('out');
 
-  function formBody() {
-    return {
-      email: document.getElementById('email').value,
-      password: document.getElementById('password').value,
-      first_name: document.getElementById('firstName').value,
-      last_name: document.getElementById('lastName').value,
-      role: document.getElementById('role').value,
+    function formBody() {
+      return {
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        first_name: document.getElementById('firstName').value,
+        last_name: document.getElementById('lastName').value,
+        role: document.getElementById('role').value,
+      };
+    }
+
+    document.getElementById('registerBtn').onclick = async () => {
+      const { email, password, first_name, last_name, role } = formBody();
+      try {
+        const data = await register(email, password, first_name, last_name, role);
+        out.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        out.textContent = err.message;
+        console.error(err);
+      }
     };
-  }
 
-  document.getElementById('registerBtn').onclick = async () => {
-    const { email, password, first_name, last_name, role } = formBody();
-    try {
-      const data = await register(email, password, first_name, last_name, role);
-      out.textContent = JSON.stringify(data, null, 2);
-    } catch (err) {
-      out.textContent = err.message;
-      console.error(err);
-    }
-  };
-
-  document.getElementById('loginBtn').onclick = async () => {
-    const { email, password } = formBody();
-    try {
-      const data = await login(email, password);
-      out.textContent = JSON.stringify(data, null, 2);
-    } catch (err) {
-      out.textContent = err.message;
-      console.error(err);
-    }
-  };
-</script>
+    document.getElementById('loginBtn').onclick = async () => {
+      const { email, password } = formBody();
+      try {
+        const data = await login(email, password);
+        out.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        out.textContent = err.message;
+        console.error(err);
+      }
+    };
+  </script>
 </body>
+
 </html>
