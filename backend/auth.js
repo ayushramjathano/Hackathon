@@ -31,8 +31,8 @@ function normalizeEmail(email) {
 function validateRegisterBody(body) {
   const email = normalizeEmail(body?.email);
   const password = body?.password;
-  const firstName = String(body?.firstName ?? '').trim();
-  const lastName = String(body?.lastName ?? '').trim();
+const firstName = String(body?.first_name ?? body?.firstName ?? '').trim();
+  const lastName = String(body?.last_name ?? body?.lastName ?? '').trim();
   const roleInput = body?.role == null || body?.role === '' ? 'student' : String(body.role).trim();
 
   const errors = [];
