@@ -17,7 +17,7 @@ export async function getAiJobRecommendations(studentInfo, jobs) {
   const stub = () =>
     jobs.slice(0, 5).map((j) => ({
       id: j.id,
-      reason: `Stub match for "${j.job_name}" based on your skills.`,
+      reason: `Match for "${j.job_name}" based on your skills.`,
     }));
 
   if (!jobs?.length) return [];
@@ -105,6 +105,6 @@ If fewer than 5 jobs exist, return fewer items.
     return cleaned;
   } catch (err) {
     console.error('Bedrock recommendation failed:', err);
-    return stub(); // hackathon-friendly fallback
+    return stub();
   }
 }

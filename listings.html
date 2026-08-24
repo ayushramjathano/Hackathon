@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<title>Students details</title>
+  <link rel="stylesheet" href="Stylingsheet.css">   
+<img class="LOGO" src="Logo N alone.png">
+      <div class="nav-links">
+      
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="login.html">Sign Up|Login</a>
+<a href="Students.html">Our students</a>
+<a href="listings.html">All Job Listings</a>
+<a href="reccomendedJobs.html">AI reccomended jobs</a>
+</div>
+<div>
+    <h1>All job listings</h1>
+<p id="status">Loading jobs…</p>
+<div id="jobs"></div>
+
+<script src="functions.js"></script>
+<script>
+  const statusEl = document.getElementById('status');
+  const jobsEl = document.getElementById('jobs');
+
+  function renderJobs(jobs) {
+    jobsEl.innerHTML = ''; // gets rid of the old job stuff
+
+    if (!jobs.length) { //checks if there are any jobs to display
+      statusEl.textContent = 'No jobs yet.';
+      return;
+    }
+
+    statusEl.textContent = jobs.length + ' job(s) found'; // shows how many jobs were found 
+
+    for (const job of jobs) { //loops through every job
+      const card = document.createElement('div'); // creates a div in for use
+      card.className = 'job-card'; //sets the class of the div so that it can be styled
+      //adds the json to the 'card'
+      card.innerHTML = ` 
+        <h2>${escapeHtml(job.job_name)}</h2> 
+        <p><strong>Pay:</strong> ${escapeHtml(job.pay_range)}</p>
+        <p><strong>Experience:</strong> ${escapeHtml(job.required_experience)}</p>
+        <p>${escapeHtml(job.job_description)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(job.contact_email)}</p>
+        <p><strong>Phone:</strong> ${escapeHtml(job.contact_phone || '—')}</p>
+      `;
+      jobsEl.appendChild(card); //adds it to the end of the jobs to carry on
+    }
+  }
+
+ // makes sure text cant break the reading of the file
+  function escapeHtml(value) {
+    return String(value ?? '')
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;');
+  }
+
+  //actually loads the job listings
+  async function loadListings() {
+    try {
+      if (!localStorage.getItem('access_token')) { //makes sure the user is logged in
+        statusEl.textContent = 'Please log in first, then open this page again.'; // if not logged in tells them to log in
+        return;
+      }
+
+      const jobs = await getAllJobs(); // array from functions.js
+      renderJobs(jobs); //renders the jobs
+    } catch (err) { //catches any errors
+      console.error(err);
+      statusEl.textContent = err.message || 'Failed to load jobs';
+    }
+  }
+
+  loadListings(); // loads when the page opens
+</script>
+</div>
+</html>

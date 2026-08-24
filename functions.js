@@ -42,7 +42,8 @@ async function getAllJobs() {
     headers: authHeaders(),
   });
   const data = await res.json()
-  if (!res.ok) throw new Error(data.error || 'Failed to get job listings')
+  if (!res.ok) throw new Error(data.error || 'Failed to get job listings');
+  return data.jobs
 }
 
  async function getRecommendedJobs() {

@@ -13,6 +13,8 @@
 <a href="about.html">About</a>
 <a href="login.html">Sign Up|Login</a>
 <a href="Students.html">Our students</a>
+<a href="listings.html">All Job Listings</a>
+<a href="reccomendedJobs.html">AI reccomended jobs</a>
       </div>
   <!-- Basic Sign up / Log in form -->
   <label>Email <input id="email" type="email" /></label><br />
@@ -31,59 +33,41 @@
 
   <pre id="out"></pre>
 
-  <script>
-    // This is where the apis are stored
-    const API = 'http://localhost:3001';
+  <script src="functions.js"></script>
+<script>
+  const out = document.getElementById('out');
 
-    // idk what this does but was there if i dont need it soon i'll remove it completely
-    // const out = document.getElementById('out');
-    // function show(data) {
-    //   out.textContent = typeof data === 'string' ? data : JSON.stringify(data, null, 2);
-    // }
+  function formBody() {
+    return {
+      email: document.getElementById('email').value,
+      password: document.getElementById('password').value,
+      first_name: document.getElementById('firstName').value,
+      last_name: document.getElementById('lastName').value,
+      role: document.getElementById('role').value,
+    };
+  }
 
-
-
-    //this functions returns all the values from the form, can be done in other ways
-    function formBody() {
-      return {
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value,
-        firstName: document.getElementById('firstName').value,
-        lastName: document.getElementById('lastName').value,
-        role: document.getElementById('role').value,
-      };
+  document.getElementById('registerBtn').onclick = async () => {
+    const { email, password, first_name, last_name, role } = formBody();
+    try {
+      const data = await register(email, password, first_name, last_name, role);
+      out.textContent = JSON.stringify(data, null, 2);
+    } catch (err) {
+      out.textContent = err.message;
+      console.error(err);
     }
+  };
 
-    // the async means that it works in the background so the website does freeze while it waits for the backend to repsond
-    document.getElementById('registerBtn').onclick = async () => {
-      const res = await fetch(API + '/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formBody()),
-      });
-    //   const data = await res.json();
-    //   show({ status: res.status, data });
-
-      // Save token if Supabase returned a session
-      if (data.session?.access_token) {
-        localStorage.setItem('access_token', data.session.access_token);
-      }
-    };
-
-    document.getElementById('loginBtn').onclick = async () => {
-      const { email, password } = formBody();
-      const res = await fetch(API + '/api/login', { //it is calling the API backend log in and passing in the method headers and body this is the same for all posts.
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-    //   const data = await res.json();
-    //   show({ status: res.status, data });
-
-      if (data.session?.access_token) {
-        localStorage.setItem('access_token', data.session.access_token);
-      }
-    };
-  </script>
+  document.getElementById('loginBtn').onclick = async () => {
+    const { email, password } = formBody();
+    try {
+      const data = await login(email, password);
+      out.textContent = JSON.stringify(data, null, 2);
+    } catch (err) {
+      out.textContent = err.message;
+      console.error(err);
+    }
+  };
+</script>
 </body>
 </html>
