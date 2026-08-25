@@ -10,13 +10,38 @@
 <a href="login.html">Sign Up|Login</a>
 <a href="Students.html">Our students</a>
 <a href="createJobListing.html">Create Job Listings</a>
-<a href="addStudentInfo.html">Add Student Info</a>
+<a href="addStudentInfo.html">Profile</a>
 <a href="listings.html">All Job Listings</a>
 <a href="reccomendedJobs.html">AI reccomended jobs</a>
 </div>
 
-once added the info cannot be changes so be careful
 
 
+<div class="forms">
+    <h1>Add profile info</h1>
+    <h6>Things marked with '*' are required  once added the info cannot be changes so be careful</h6>
+    <label>Skills Raw Input*<input  id="skills" type="text" /></label><br />
+    <label>Project Descriptions*<input id="project" type="text" /></label><br />
+   
+   <br/><br/>
+    <button id="submitBtn">Add Student Info</button>
+  </div>
+
+  <script src="functions.js"></script>
+  <script>
+
+    document.getElementById('submitBtn').onclick = async () => {
+      const skills_raw_input = document.getElementById('skills').value;
+      const project_description = document.getElementById('project').value;
+      try {
+        const data = await addStudentInfo(skills_raw_input, project_description);
+        // out.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        // out.textContent = err.message;
+        console.error(err);
+      }
+    };
+
+  </script>
 
 </html>
