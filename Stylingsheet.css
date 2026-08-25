@@ -236,3 +236,31 @@ html {
   opacity: 0.9;
   transform: translateY(-1px);
 }
+/* Make textarea match your existing glassmorphic input style exactly */
+.forms textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+  box-sizing: border-box;
+  
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-size: 0.95rem;
+  outline: none;
+  font-family: inherit; /* Ensures it inherits system-ui */
+  transition: all 0.2s ease;
+
+  /* Textarea custom settings */
+  height: 120px;        /* Controls how tall the input looks */
+  resize: none;         /* Disables the user grab-and-resize corner handle */
+}
+
+/* Focus state matching your other fields */
+.forms textarea:focus {
+  border-color: #a855f7;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.25);
+}
+

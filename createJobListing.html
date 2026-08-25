@@ -27,8 +27,8 @@
     <h6>Things marked with '*' are required</h6>
     <label>Job Name*<input id="job" type="text" /></label><br />
     <label>Pay Range*<input id="pay" type="text" /></label><br />
-    <label>Job Description*<input id="description" /></label><br />
-    <label>Required Experience*<input id="experience" /></label><br />
+    <label>Job Description*<textarea rows="4" cols="50" placeholder="Job Description" id="description"></textarea></label><br />
+    <label>Required Experience*<textarea rows="4" cols="50" id="experience" height="100px"></textarea></label><br />
     <label>Contact Email*<input id="email" /></label><br />
     <label>Contact Number<input id="phone" /></label><br />
     <br /><br />
@@ -40,18 +40,20 @@
 <script>
 
   document.getElementById('postBtn').onclick = async () => {
-    const job_name = document.getElementById('skills').value;
-    const pay_range = document.getElementById('project').value;
-    const job_description = document.getElementById('skills').value;
-    const required_experience = document.getElementById('project').value;
-    const contact_email = document.getElementById('skills').value;
-    const contact_number = document.getElementById('project').value || null;
+    const job_name = document.getElementById('job').value;
+    const pay_range = document.getElementById('pay').value;
+    const job_description = document.getElementById('description').value;
+    const required_experience = document.getElementById('experience').value;
+    const contact_email = document.getElementById('email').value;
+    const contact_number = document.getElementById('phone').value || null;
     try {
-      const data = await createJobListings(job_name, pay_range, job_description, required_experience, contact_email, contact_number);
+      const data = await createJobListing(job_name, pay_range, job_description, required_experience, contact_email, contact_number);
+      alert("Job was posted succesfully!")
       // out.textContent = JSON.stringify(data, null, 2);
     } catch (err) {
       // out.textContent = err.message;
       console.error(err);
+      alert("Posting job failed. make sure all the fields are filled in and that you are an employer!")
     }
   };
 
