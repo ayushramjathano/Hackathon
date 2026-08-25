@@ -15,12 +15,13 @@
     <a href="about.html">About</a>
     <a href="login.html">Sign Up|Login</a>
     <a href="Students.html">Our students</a>
+    <a href="createJobListing.html">Create Job Listings</a>
+    <a href="addStudentInfo.html">Add Student Info</a>
     <a href="listings.html">All Job Listings</a>
     <a href="reccomendedJobs.html">AI reccomended jobs</a>
   </div>
-  <!-- Basic Sign up / Log in form -->
-   <div class="signup-login">
-    <div>
+
+  <div class="forms">
     <h1>Register</h1>
     <label>Email <input id="email" type="email" /></label><br />
     <label>Password <input id="password" type="password" /></label><br />
@@ -32,20 +33,16 @@
         <option value="employer">employer</option>
       </select>
     </label><br /><br />
-
     <button id="registerBtn">Register</button>
   </div>
-  <div>
+  <div class="forms">
     <h1>Login</h1>
-    <label>Email <input id="email" type="email" /></label><br />
-    <label>Password <input id="password" type="password" /></label><br />
-    <br />
-
+    <label>Email <input id="email-login" type="email" /></label><br />
+    <label>Password <input id="password-login" type="password" /></label><br />
+    </label><br /><br />
     <button id="loginBtn">Login</button>
   </div>
-   </div>
   
-
 
   <pre id="out"></pre>
 
@@ -75,7 +72,8 @@
     };
 
     document.getElementById('loginBtn').onclick = async () => {
-      const { email, password } = formBody();
+      const email = document.getElementById('email-login').value;
+      const password = document.getElementById('password-login').value;
       try {
         const data = await login(email, password);
         out.textContent = JSON.stringify(data, null, 2);
