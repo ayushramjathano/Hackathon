@@ -1,18 +1,60 @@
 <!DOCTYPE html>
 <html>
-<title>Nexora.AI Create Listing </title>
-  <link rel="stylesheet" href="Stylingsheet.css">   
-<img class="LOGO" src="Logo N alone.png">
-      <div class="nav-links">
-      
+
+<head>
+  <title>Nexora.AI Create Listing </title>
+  <link rel="stylesheet" href="Stylingsheet.css">
+  <img class="LOGO" src="Logo N alone.png">
+  <div class="nav-links">
+</head>
+
+<body>
+
+
+
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
 <a href="login.html">Sign Up|Login</a>
 <a href="Students.html">Our students</a>
 <a href="createJobListing.html">Create Job Listings</a>
-<a href="addStudentInfo.html">Add Student Info</a>
+<a href="addStudentInfo.html">Profile</a>
 <a href="listings.html">All Job Listings</a>
 <a href="reccomendedJobs.html">AI reccomended jobs</a>
-</div>
+  </div>
+
+  <div class="forms">
+    <h1>Post Job</h1>
+    <h6>Things marked with '*' are required</h6>
+    <label>Job Name*<input id="job" type="text" /></label><br />
+    <label>Pay Range*<input id="pay" type="text" /></label><br />
+    <label>Job Description*<input id="description" /></label><br />
+    <label>Required Experience*<input id="experience" /></label><br />
+    <label>Contact Email*<input id="email" /></label><br />
+    <label>Contact Number<input id="phone" /></label><br />
+    <br /><br />
+    <button id="postBtn">Post Job</button>
+  </div>
+</body>
+
+<script src="functions.js"></script>
+<script>
+
+  document.getElementById('postBtn').onclick = async () => {
+    const job_name = document.getElementById('skills').value;
+    const pay_range = document.getElementById('project').value;
+    const job_description = document.getElementById('skills').value;
+    const required_experience = document.getElementById('project').value;
+    const contact_email = document.getElementById('skills').value;
+    const contact_number = document.getElementById('project').value || null;
+    try {
+      const data = await createJobListings(job_name, pay_range, job_description, required_experience, contact_email, contact_number);
+      // out.textContent = JSON.stringify(data, null, 2);
+    } catch (err) {
+      // out.textContent = err.message;
+      console.error(err);
+    }
+  };
+
+</script>
 
 </html>
