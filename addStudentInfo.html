@@ -39,7 +39,7 @@
         alert("Student info was added succesfully")
       } catch (err) {
         // out.textContent = err.message;
-        alert("There wan an error adding the info, remember only students can add info, and as of now you cannot update the info")
+        alert("There wan an error adding the info, " + err.message);
         console.error(err);
       }
     };
