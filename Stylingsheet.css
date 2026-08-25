@@ -72,8 +72,167 @@ html {
     height:500px;
 }
 
+/* Styling for every .job-card element */
 .job-card {
-    background-color: white;
-    color: black;
-    
+  /* Dimensions & Centering */
+  width: 90%;
+  max-width: 800px;
+  margin: 1.5rem auto;
+  padding: 1.75rem 2rem;
+  box-sizing: border-box;
+
+  /* Glassmorphism Surface (Matches Form Style) */
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+  /* Typography Base */
+  color: #ffffff;
+  font-family: system-ui, -apple-system, sans-serif;
+  text-align: left;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover Accent Effect */
+.job-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 15px rgba(168, 85, 247, 0.15);
+}
+
+/* Headings inside .job-card */
+.job-card h1,
+.job-card h2,
+.job-card h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* Labels and text inside .job-card */
+.job-card p, 
+.job-card div {
+  margin: 0.5rem 0;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+}
+
+/* Highlight strong text (Pay, Experience, Email, etc.) */
+.job-card strong, 
+.job-card b {
+  color: #a855f7;
+  font-weight: 600;
+}
+
+/* Parent Container Centering & Card Styling */
+.forms {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 3rem auto;
+  padding: 2.5rem 2rem;
+  width: 90%;
+  max-width: 400px;
+  
+  /* Glassmorphism Surface */
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+
+  /* Typography Base */
+  color: #ffffff;
+  font-family: system-ui, -apple-system, sans-serif;
+  text-align: center;
+}
+
+/* Form Titles (Register / Login) */
+.forms h1, 
+.forms h2, 
+.forms h3 {
+  color: #ffffff;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+/* Individual Form Layout */
+.forms form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Labels */
+.forms label {
+  width: 100%;
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 0.35rem;
+  display: block;
+}
+
+/* Inputs & Select Dropdowns */
+.forms input, 
+.forms select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+  box-sizing: border-box;
+  
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.forms input:focus, 
+.forms select:focus {
+  border-color: #a855f7;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.25);
+}
+
+.forms select option {
+  background-color: #0f172a;
+  color: #ffffff;
+}
+
+/* Submit Buttons */
+.forms button, 
+.forms input[type="submit"] {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.forms button:hover, 
+.forms input[type="submit"]:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
