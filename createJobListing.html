@@ -53,7 +53,7 @@
     } catch (err) {
       // out.textContent = err.message;
       console.error(err);
-      alert("Posting job failed. make sure all the fields are filled in and that you are an employer!")
+      alert("Posting job failed, " + err.message)
     }
   };
 
