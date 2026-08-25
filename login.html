@@ -64,9 +64,11 @@
       const { email, password, first_name, last_name, role } = formBody();
       try {
         const data = await register(email, password, first_name, last_name, role);
-        out.textContent = JSON.stringify(data, null, 2);
+        alert("Registered an account successfully");
+        // out.textContent = JSON.stringify(data, null, 2);
       } catch (err) {
-        out.textContent = err.message;
+        // out.textContent = err.message;
+        alert("Error registering Account, " + err.message);
         console.error(err);
       }
     };
@@ -76,10 +78,12 @@
       const password = document.getElementById('password-login').value;
       try {
         const data = await login(email, password);
-        out.textContent = JSON.stringify(data, null, 2);
+        // out.textContent = JSON.stringify(data, null, 2);
+        alert("Login was succesful");
       } catch (err) {
-        out.textContent = err.message;
+        // out.textContent = err.message;
         console.error(err);
+        alert("Error logging in, " + err.message);
       }
     };
   </script>
