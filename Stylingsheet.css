@@ -16,13 +16,18 @@ html {
     text-align: center;
     color: cornflowerblue;
 }
-.img{
-    height: 300px;
+.img1{
+    height: 2200px;
     width: 750px;
     display: block;
-    margin: 0 auto;
+    margin: left;
+    border-radius: 10px;
+    border-color: rgba(168, 85, 247, 0.4);
+    border-style:double;
     
 }
+ 
+
 .nav-links{
     background-color: #000000;
     color: cyan;
@@ -48,8 +53,10 @@ html {
 .about4{color: blue;}
 
 /*styling the hr in the about page*/
-hr{width:100%;
-        border-color: rgb(61, 4, 61);}
+hr{
+  width:100%;
+  border-color: rgba(168, 85, 247, 0.4);
+     }
 
 /*  Paragraphs in the about page*/
 p { color:cornflowerblue;}
