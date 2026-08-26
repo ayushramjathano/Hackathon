@@ -9,6 +9,7 @@ html {
     font-size: 100px;
     color: blue;
     
+    
 }
 .intro{
     font-family: fantasy;
@@ -39,6 +40,20 @@ html {
     
 
 }    
+/*styling the headings in the about page*/
+.about {color:blue; text-align: center;}
+.about1{color: blue;}
+.about2{color: blue;}
+.about3{color: blue;}
+.about4{color: blue;}
+
+/*styling the hr in the about page*/
+hr{width:100%;
+        border-color: rgb(61, 4, 61);}
+
+/*  Paragraphs in the about page*/
+p { color:cornflowerblue;}
+
 .nav-links:hover{
     background-color: #000000;
 }
